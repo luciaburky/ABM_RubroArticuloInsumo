@@ -17,7 +17,8 @@ type SaveRubroModalProps = {
 const SaveRubroModal: React.FC<SaveRubroModalProps> = ({ onSave, onHide, rubro, show }) => {
   // State
   const [validated, setValidated] = React.useState<boolean>(false);
-
+  const [denominacion, setDenominacion] = React.useState<string>(rubro?.denominacion || ''); 
+  const [rubroPadre, setRubroPadre] = React.useState<string>(rubro?.rubroPadre || ''); 
   // Handlers
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
@@ -27,12 +28,11 @@ const SaveRubroModal: React.FC<SaveRubroModalProps> = ({ onSave, onHide, rubro, 
 
     if (form.checkValidity() === false) {
       setValidated(true);
-
       return;
     }
 
-    const data = Object.fromEntries(new FormData(form));
-    onSave({ ...rubro!, ...data });
+    //const data = Object.fromEntries(new FormData(form));
+    onSave({ ...rubro!, denominacion, rubroPadre});
   };
 
   // Render
@@ -40,13 +40,15 @@ const SaveRubroModal: React.FC<SaveRubroModalProps> = ({ onSave, onHide, rubro, 
     <Modal show={show} onHide={onHide}>
       <Form noValidate onSubmit={handleSubmit} validated={validated}>
         <Modal.Header closeButton>
-          <Modal.Title>{rubro?.id === 0 ? 'Create' : 'Edit'} Rubro Artículo Insumo</Modal.Title>
+          <Modal.Title>{rubro?.id === 0 ? 'Create' : 'Edit'}Rubro Artículo Insumo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row className="mb-3">
             <Form.Group as={Col}>
               <Form.Label>Denominación</Form.Label>
               <Form.Control
+                value={denominacion}
+                onChange={(e) => setDenominacion(e.target.value)}
                 defaultValue={rubro?.denominacion}
                 name="denominacion"
                 placeholder="Denominación"
@@ -59,14 +61,16 @@ const SaveRubroModal: React.FC<SaveRubroModalProps> = ({ onSave, onHide, rubro, 
             <Form.Group as={Col}>
               <Form.Label>Rubro Padre</Form.Label>
               <Form.Control
+                value={rubroPadre}
+                onChange={(e) => setRubroPadre(e.target.value)}
                 defaultValue={rubro?.rubroPadre}
                 name="rubroPadre"
                 placeholder="Rubro Padre"
-                required
                 type="text"
               />
             </Form.Group>
           </Row>
+        
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
