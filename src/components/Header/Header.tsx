@@ -22,8 +22,8 @@ const Header = () => {
                         <ul className="items links-navbar">
                             <li className=" item-link"><a href="#" >Inicio</a></li>
                             <li className=" item-link nav-item-dropdown">
-                                <a href="#" className="contenedor-prod">
-                                    Productos
+                                <a href="/admin" className="contenedor-prod">
+                                    Admin
                                     <span className="material-symbols-outlined">expand_more</span>
                                 </a>
                                 <ul className="vertical-menu">
