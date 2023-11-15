@@ -4,7 +4,7 @@ import * as React from 'react';
 const Admin = React.lazy(() => import('../pages/admin/Admin'));
 const Home = React.lazy(() => import('../pages/home/Home'));
 const Login = React.lazy(() => import('../pages/login/Login'));
-const Components = React.lazy(() => import('../pages/components/components'));
+const Components = React.lazy(() => import('../pages/components/Components'));
 const PrivateRoute = React.lazy(() => import('./PrivateRoute'));
 
 const Router: React.FC = () => (

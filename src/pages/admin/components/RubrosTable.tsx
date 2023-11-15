@@ -90,7 +90,7 @@ const RubrosTable: React.FC<RubrosTableProps> = ({ rubros }) => {
             </div>
           )
           : (
-            <>
+            <div className="cuerpote">
               <Button onClick={() => onShowSaveModal()} style={{ float: 'right', margin: 10 }} variant="primary">Crear Rubro Artículo Insumo</Button>
               <Table striped bordered hover>
                 <thead>
@@ -116,7 +116,7 @@ const RubrosTable: React.FC<RubrosTableProps> = ({ rubros }) => {
                   }
                 </tbody>
               </Table>
-            </>
+            </div>
           )
       }
       <DeleteRubroModal
