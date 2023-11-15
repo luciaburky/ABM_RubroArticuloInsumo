@@ -1,6 +1,5 @@
 type RubroArticuloInsumo = {
     denominacion: string;
-    rubroPadre: string;
     id?: number;
 }
 

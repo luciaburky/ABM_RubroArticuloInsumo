@@ -15,8 +15,7 @@ type RubrosTableProps = {
 
 const emptyRubro: RubroArticuloInsumo = {
   denominacion: '',
-  id: 0,
-  rubroPadre: '',
+  id: 0
 };
 
 const RubrosTable: React.FC<RubrosTableProps> = ({ rubros }) => {
@@ -36,7 +35,8 @@ const RubrosTable: React.FC<RubrosTableProps> = ({ rubros }) => {
       setShowDeleteModal(false);
       setLoading(true);
       DataLayer.delete.rubroArticuloInsumo(selectedRubro.id!)
-        .then(() => setListedRubros((prevState: RubroArticuloInsumo[]) => prevState.filter((item: RubroArticuloInsumo) => item.id !== selectedRubro.id)))
+        .then(() => setListedRubros((prevState: RubroArticuloInsumo[]) => prevState.filter
+        ((item: RubroArticuloInsumo) => item.id !== selectedRubro.id)))
         .catch((error: any) => setError(error))
         .finally(() => setLoading(false));
     }
@@ -47,7 +47,9 @@ const RubrosTable: React.FC<RubrosTableProps> = ({ rubros }) => {
       setLoading(true);
       if (r.id) {
         DataLayer.update.rubroArticuloInsumo(r)
-          .then((editedRubro: RubroArticuloInsumo) => setListedRubros((prevState: RubroArticuloInsumo[]) => prevState.map((item: RubroArticuloInsumo) => item.id === editedRubro.id ? editedRubro : item)))
+          .then((editedRubro: RubroArticuloInsumo) => setListedRubros((prevState:
+             RubroArticuloInsumo[]) => prevState.map((item: RubroArticuloInsumo) => item.id === 
+             editedRubro.id ? editedRubro : item)))
           .catch((error: any) => setError(error))
           .finally(() => setLoading(false));
       } else {
@@ -55,17 +57,20 @@ const RubrosTable: React.FC<RubrosTableProps> = ({ rubros }) => {
 
         DataLayer.create.rubroArticuloInsumo(r)
           .then((createdRubro: RubroArticuloInsumo) => {
-            setListedRubros((prevState: RubroArticuloInsumo[]) => [...prevState, createdRubro]);
+            setListedRubros((prevState: RubroArticuloInsumo[]) => [...prevState,
+            createdRubro]);
           })
           .catch((error: any) => setError(error))
           .finally(() => setLoading(false));
       }
     }
   }, [selectedRubro, setShowSaveModal, setListedRubros, setLoading]);
+  
   const onShowDeleteModal = React.useCallback((r: RubroArticuloInsumo) => {
     setSelectedRubro(r);
     setShowDeleteModal(true);
   }, [setSelectedRubro, setShowDeleteModal]);
+  
   const onShowSaveModal = React.useCallback((r?: RubroArticuloInsumo) => {
     setSelectedRubro(r ?? emptyRubro);
     setShowSaveModal(true);
@@ -85,19 +90,21 @@ const RubrosTable: React.FC<RubrosTableProps> = ({ rubros }) => {
       {
         loading
           ? (
-            <div style={{ alignItems: 'center', display: 'flex', height: '100vh', justifyContent: 'center', width: '100wh' }}>
+            <div style={{ alignItems: 'center', display: 'flex', height: '100vh', 
+            justifyContent: 'center', width: '100wh' }}>
               <Spinner animation="border" />
             </div>
           )
           : (
             <div className="cuerpote">
-              <Button onClick={() => onShowSaveModal()} style={{ float: 'right', margin: 10 }} variant="primary">Crear Rubro Artículo Insumo</Button>
+              <Button onClick={() => onShowSaveModal()} style={{ float: 'right', margin:
+              10 }} variant="primary">Crear Rubro Artículo Insumo</Button>
               <Table striped bordered hover>
                 <thead>
                   <tr>
                     <th>#</th>
                     <th>Denominación</th>
-                    <th>Rubro Padre</th>
+                    {/* <th>Rubro Padre</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -105,8 +112,8 @@ const RubrosTable: React.FC<RubrosTableProps> = ({ rubros }) => {
                     listedRubros.map((r: RubroArticuloInsumo) => (
                       <tr key={r.id}>
                         <td width='10%'>{r.id}</td>
-                        <td width='60%'>{r.denominacion}</td>
-                        <td width='15%'>{r.rubroPadre}</td>
+                        <td width='70%'>{r.denominacion}</td>
+                        {/* <td width='15%'>{r.rubroPadre}</td> */}
                         <td width='15%'>
                           <Button onClick={() => onShowSaveModal(r)} variant="link">Editar</Button>
                           <Button onClick={() => onShowDeleteModal(r)} variant="link">Eliminar</Button>
